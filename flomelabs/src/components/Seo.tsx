@@ -1,18 +1,20 @@
 import { Helmet } from 'react-helmet-async'
-import { SITE_NAME } from '../config/site'
+import { SITE } from '../config/site'
 
-interface SeoProps {
-  title: string
-  description: string
-}
+const TITLE = `${SITE.name} — Independent Digital Studio`
+const DESCRIPTION =
+  'FlomeLabs is an independent digital studio designing and building mobile applications, software products and video games.'
 
-export function Seo({ title, description }: SeoProps) {
+export function Seo() {
   return (
     <Helmet>
-      <title>
-        {title} — {SITE_NAME}
-      </title>
-      <meta name="description" content={description} />
+      <title>{TITLE}</title>
+      <meta name="description" content={DESCRIPTION} />
+      <meta name="theme-color" content="#111318" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={TITLE} />
+      <meta property="og:description" content={DESCRIPTION} />
+      <meta name="twitter:card" content="summary_large_image" />
     </Helmet>
   )
 }

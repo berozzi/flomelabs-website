@@ -1,7 +1,15 @@
-export const SITE_NAME = 'FlomeLabs'
-
-// TODO: nazwa produktu nie jest jeszcze ustalona — zmień tę wartość, gdy zostanie zatwierdzona.
-export const FLAGSHIP_APP_NAME = '{{TODO: nazwa aplikacji}}'
-
-export const CONTACT_EMAIL = '{{TODO: e-mail firmowy}}'
-export const RESPONSE_TIME = '{{TODO: np. 2 dni robocze}}'
+export const SITE = {
+  name: 'FlomeLabs',
+  tagline: 'Independent digital studio',
+  email: 'hello@flomelabs.example',
+  location: 'Poland',
+  nav: [
+    { label: 'Work', href: '#work' },
+    { label: 'Studio', href: '#studio' },
+    { label: 'Contact', href: '#contact' },
+  ],
+  socials: {
+    linkedin: 'https://www.linkedin.com/company/flomelabs-placeholder',
+    instagram: 'https://www.instagram.com/flomelabs.placeholder',
+  },
+} as const
