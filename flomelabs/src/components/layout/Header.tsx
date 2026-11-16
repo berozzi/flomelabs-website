@@ -92,7 +92,7 @@ export function Header() {
               {SITE.nav.map((item, index) => (
                 <motion.a
                   key={item.href}
-                  href={item.href}
+                  href={`/${item.href}`}
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-between border-b border-paper/10 py-5 font-display text-4xl font-semibold tracking-[-0.04em]"
                   initial={reduce ? false : { opacity: 0, y: 16 }}
@@ -151,7 +151,7 @@ export function Header() {
             {SITE.nav.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
+                href={`/${item.href}`}
                 className="relative text-sm opacity-70 transition-opacity duration-300 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:opacity-100 hover:after:scale-x-100"
               >
                 {item.label}
@@ -160,7 +160,7 @@ export function Header() {
           </nav>
 
           <a
-            href="#contact"
+            href="/#contact"
             className={`group hidden items-center gap-2 rounded-lg border px-3.5 py-2 text-xs font-medium transition-colors duration-300 md:inline-flex ${
               solid
                 ? 'border-ink/15 hover:border-ink/40'

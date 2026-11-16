@@ -125,7 +125,7 @@ export function HeroVisual() {
             <span className="size-1.5 rounded-full bg-paper/25" />
           </div>
           <p className="mt-4 font-display text-lg font-medium tracking-[-0.03em] text-paper/90">
-            CitizenWallet
+            Vitelo
           </p>
           <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-paper/40">
             AntSpire · In development

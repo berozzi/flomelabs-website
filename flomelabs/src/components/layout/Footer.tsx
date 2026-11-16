@@ -1,10 +1,16 @@
-import { ArrowUpRight } from 'lucide-react'
+import { useState } from 'react'
+import { ArrowUpRight, ChevronDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { SITE } from '../../config/site'
 import { LogoMark } from '../ui/Logo'
 
 const year = new Date().getFullYear()
 
+const PRIVACY_APPS = [{ label: 'Vitelo', href: '/privacy-policy/vitelo' }]
+
 export function Footer() {
+  const [privacyOpen, setPrivacyOpen] = useState(false)
+
   return (
     <footer className="relative overflow-hidden bg-ink text-paper">
       <div className="mx-auto max-w-site px-6 pt-20 md:pt-24">
@@ -33,7 +39,7 @@ export function Footer() {
               {[...SITE.nav, { label: 'Standards', href: '#standards' }].map((item) => (
                 <li key={item.href}>
                   <a
-                    href={item.href}
+                    href={`/${item.href}`}
                     className="group inline-flex items-center gap-2 text-sm text-paper/65 transition-colors hover:text-paper"
                   >
                     {item.label}
@@ -81,6 +87,45 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+
+            <div className="mt-8 border-t border-paper/10 pt-6">
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-paper/55">
+                Legal
+              </p>
+              <div className="mt-3">
+                <button
+                  type="button"
+                  onClick={() => setPrivacyOpen((open) => !open)}
+                  className="group inline-flex w-full items-center justify-between gap-3 text-left text-sm text-paper/65 transition-colors hover:text-paper"
+                  aria-expanded={privacyOpen}
+                  aria-controls="footer-privacy-apps"
+                >
+                  <span>Privacy Policy</span>
+                  <ChevronDown
+                    className={`size-4 shrink-0 text-paper/45 transition-transform duration-200 ${
+                      privacyOpen ? 'rotate-180' : ''
+                    }`}
+                    aria-hidden="true"
+                  />
+                </button>
+                {privacyOpen && (
+                  <ul id="footer-privacy-apps" className="mt-3 space-y-2 border-l border-paper/10 pl-3">
+                    {PRIVACY_APPS.map((app) => (
+                      <li key={app.href}>
+                        <Link
+                          to={app.href}
+                          className="block text-sm text-paper/55 transition-colors hover:text-paper"
+                          onClick={() => setPrivacyOpen(false)}
+                        >
+                          {app.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
+
             <p className="mt-6 max-w-[22ch] font-mono text-[9px] uppercase leading-relaxed tracking-[0.16em] text-paper/45">
               Placeholder contact details
             </p>
@@ -91,18 +136,18 @@ export function Footer() {
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/55">
             © {year} {SITE.name}. All rights reserved.
           </p>
-          <a
-            href="#top"
+          <Link
+            to="/"
             className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-paper/55 transition-colors hover:text-paper"
           >
-            Back to top
+            Back to home
             <span className="grid size-6 place-items-center rounded-full border border-paper/15 transition-colors group-hover:border-accent">
               <ArrowUpRight
                 className="size-3 -rotate-45 transition-transform duration-300 group-hover:-translate-y-0.5"
                 aria-hidden="true"
               />
             </span>
-          </a>
+          </Link>
         </div>
       </div>
 

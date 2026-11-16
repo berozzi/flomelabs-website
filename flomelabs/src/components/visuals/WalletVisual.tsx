@@ -68,7 +68,7 @@ export function WalletVisual({ className = '' }: WalletVisualProps) {
       </div>
 
       <div className="absolute bottom-[6%] left-[6%] hidden font-mono text-[7px] uppercase tracking-[0.2em] text-ink/35 sm:block">
-        CitizenWallet / Mobile
+        Vitelo / Mobile
       </div>
 
       <PhoneMockup className="relative z-10 rotate-0 transition-transform duration-700 ease-out sm:rotate-[-6deg] group-hover:rotate-0 group-hover:scale-[1.03]" />

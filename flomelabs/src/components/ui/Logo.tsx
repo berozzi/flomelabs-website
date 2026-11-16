@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { SITE } from '../../config/site'
 
 interface LogoMarkProps {
@@ -37,15 +38,15 @@ interface LogoProps {
 
 export function Logo({ className = '' }: LogoProps) {
   return (
-    <a
-      href="#top"
+    <Link
+      to="/"
       className={`inline-flex items-center gap-2.5 ${className}`}
-      aria-label={`${SITE.name} — back to top`}
+      aria-label={`${SITE.name} — home`}
     >
       <LogoMark />
       <span className="font-display text-[17px] font-semibold tracking-[-0.035em]">
         {SITE.name}
       </span>
-    </a>
+    </Link>
   )
 }

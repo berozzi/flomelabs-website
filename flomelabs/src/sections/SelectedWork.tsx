@@ -106,7 +106,7 @@ export function SelectedWork() {
         <div className="mt-20 space-y-24 md:space-y-32">
           <ProjectCard
             index="01"
-            name="CitizenWallet"
+            name="Vitelo"
             category="Mobile application · Productivity"
             description="A digital wallet designed to simplify everyday life through loyalty cards and receipt management."
             tags={['Product design', 'iOS', 'Android']}
