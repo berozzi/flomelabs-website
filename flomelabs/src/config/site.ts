@@ -4,9 +4,16 @@ export const SITE = {
   email: 'hello@flomelabs.example',
   location: 'Poland',
   nav: [
-    { label: 'Work', href: '#work' },
-    { label: 'Studio', href: '#studio' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Work', to: '/work' },
+    { label: 'Studio', to: '/#studio' },
+    { label: 'Contact', to: '/contact' },
+  ],
+  footerNav: [
+    { label: 'Work', to: '/work' },
+    { label: 'Studio', to: '/#studio' },
+    { label: 'Standards', to: '/#standards' },
+    { label: 'Contact', to: '/contact' },
+    { label: 'Software Policies', to: '/software-policies' },
   ],
   socials: {
     linkedin: 'https://www.linkedin.com/company/flomelabs-placeholder',

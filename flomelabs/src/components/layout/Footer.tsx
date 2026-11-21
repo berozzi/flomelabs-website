@@ -1,4 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { SITE } from '../../config/site'
 import { LogoMark } from '../ui/Logo'
 
@@ -30,10 +31,10 @@ export function Footer() {
               Navigate
             </p>
             <ul className="mt-5 space-y-3">
-              {[...SITE.nav, { label: 'Standards', href: '#standards' }].map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
+              {SITE.footerNav.map((item) => (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
                     className="group inline-flex items-center gap-2 text-sm text-paper/65 transition-colors hover:text-paper"
                   >
                     {item.label}
@@ -41,7 +42,7 @@ export function Footer() {
                       className="size-3.5 -translate-x-1 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-60"
                       aria-hidden="true"
                     />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -81,7 +82,7 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-            <p className="mt-6 max-w-[22ch] font-mono text-[9px] uppercase leading-relaxed tracking-[0.16em] text-paper/45">
+            <p className="mt-6 max-w-[22ch] font-mono text-[9px] uppercase leading-relaxed tracking-[0.16em] text-paper/55">
               Placeholder contact details
             </p>
           </div>
@@ -91,9 +92,10 @@ export function Footer() {
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-paper/55">
             © {year} {SITE.name}. All rights reserved.
           </p>
-          <a
-            href="#top"
-            className="group inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-paper/55 transition-colors hover:text-paper"
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="group inline-flex items-center gap-2 self-start font-mono text-[10px] uppercase tracking-[0.18em] text-paper/55 transition-colors hover:text-paper sm:self-auto"
           >
             Back to top
             <span className="grid size-6 place-items-center rounded-full border border-paper/15 transition-colors group-hover:border-accent">
@@ -102,7 +104,7 @@ export function Footer() {
                 aria-hidden="true"
               />
             </span>
-          </a>
+          </button>
         </div>
       </div>
 

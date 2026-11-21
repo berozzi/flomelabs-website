@@ -1,6 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from '../components/ui/Reveal'
-import { SectionLabel } from '../components/ui/SectionLabel'
 
 const DISCIPLINES = ['Engineering', 'Design', 'Creativity']
 
@@ -8,13 +7,7 @@ export function Philosophy() {
   return (
     <section id="studio" className="relative overflow-hidden bg-paper text-ink">
       <div className="mx-auto max-w-site px-6 py-28 md:py-40">
-        <Reveal>
-          <SectionLabel index="02" tone="light">
-            Philosophy
-          </SectionLabel>
-        </Reveal>
-
-        <div className="mt-14 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
           <Reveal>
             <h2 className="font-display text-[clamp(2.5rem,5.2vw,5rem)] font-semibold leading-[1.02] tracking-[-0.045em] text-balance">
               Technology is a tool.{' '}

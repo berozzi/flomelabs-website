@@ -1,15 +1,20 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { SITE } from '../../config/site'
 import { Logo } from '../ui/Logo'
+
+function prefetchRoute(to: string) {
+  if (to === '/work') void import('../../pages/Work')
+  if (to === '/contact') void import('../../pages/ContactPage')
+}
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
-  const reduce = useReducedMotion()
+  const { pathname, hash } = useLocation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32)
@@ -28,7 +33,7 @@ export function Header() {
     const focusables = menu
       ? Array.from(menu.querySelectorAll<HTMLElement>('a[href], button'))
       : []
-    focusables[0]?.focus()
+    const focusFrame = requestAnimationFrame(() => focusables[0]?.focus())
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -53,6 +58,7 @@ export function Header() {
 
     document.addEventListener('keydown', onKeyDown)
     return () => {
+      cancelAnimationFrame(focusFrame)
       document.body.style.overflow = previousOverflow
       document.removeEventListener('keydown', onKeyDown)
     }
@@ -67,79 +73,77 @@ export function Header() {
     return () => media.removeEventListener('change', onChange)
   }, [])
 
-  const solid = scrolled || open
+  const solid = scrolled || open || pathname !== '/'
   const pillTone = solid
     ? 'border-ink/10 bg-paper/85 text-ink shadow-[0_8px_30px_-12px_rgba(17,19,24,0.25)] backdrop-blur-xl'
     : 'border-transparent bg-transparent text-paper'
 
+  const isActive = (to: string) =>
+    to.startsWith('/#') ? pathname === '/' && hash === to.slice(1) : pathname === to
+
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            ref={menuRef}
-            id="mobile-menu"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Menu"
-            className="fixed inset-0 z-0 overflow-y-auto bg-ink px-6 pb-10 pt-28 text-paper md:hidden"
-            initial={reduce ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={reduce ? undefined : { opacity: 0 }}
-            transition={{ duration: 0.25 }}
-          >
-            <nav aria-label="Mobile navigation" className="flex flex-col">
-              {SITE.nav.map((item, index) => (
-                <motion.a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-between border-b border-paper/10 py-5 font-display text-4xl font-semibold tracking-[-0.04em]"
-                  initial={reduce ? false : { opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: 0.05 + index * 0.06,
-                    duration: 0.4,
-                  }}
-                >
-                  {item.label}
-                  <ArrowUpRight className="size-5 text-paper/40" aria-hidden="true" />
-                </motion.a>
-              ))}
-            </nav>
+      <div
+        ref={menuRef}
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        inert={!open}
+        aria-hidden={!open}
+        className={`fixed inset-0 z-0 overflow-y-auto bg-ink px-6 pb-10 pt-28 text-paper transition-opacity duration-300 md:hidden ${
+          open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+      >
+        <nav aria-label="Mobile navigation" className="flex flex-col">
+          {SITE.nav.map((item, index) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              onMouseEnter={() => prefetchRoute(item.to)}
+              onFocus={() => prefetchRoute(item.to)}
+              onClick={() => setOpen(false)}
+              className={`flex items-center justify-between border-b border-paper/10 py-5 font-display text-4xl font-semibold tracking-[-0.04em] transition-[opacity,transform] duration-500 ${
+                open ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+              }`}
+              style={{ transitionDelay: open ? `${50 + index * 60}ms` : '0ms' }}
+            >
+              {item.label}
+              <ArrowUpRight className="size-5 text-paper/40" aria-hidden="true" />
+            </Link>
+          ))}
+        </nav>
 
-            <div className="mt-10 text-sm text-paper/55">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-paper/35">
-                Get in touch
-              </p>
-              <a
-                href={`mailto:${SITE.email}`}
-                className="mt-3 block text-paper/80 transition-colors hover:text-paper"
-              >
-                {SITE.email}
-              </a>
-              <div className="mt-5 flex gap-6 font-mono text-[10px] uppercase tracking-[0.18em]">
-                <a
-                  href={SITE.socials.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition-colors hover:text-paper"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href={SITE.socials.instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition-colors hover:text-paper"
-                >
-                  Instagram
-                </a>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <div className="mt-10 text-sm text-paper/55">
+          <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-paper/35">
+            Get in touch
+          </p>
+          <a
+            href={`mailto:${SITE.email}`}
+            className="mt-3 block text-paper/80 transition-colors hover:text-paper"
+          >
+            {SITE.email}
+          </a>
+          <div className="mt-5 flex gap-6 font-mono text-[10px] uppercase tracking-[0.18em]">
+            <a
+              href={SITE.socials.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-paper"
+            >
+              LinkedIn
+            </a>
+            <a
+              href={SITE.socials.instagram}
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-paper"
+            >
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
 
       <div className="relative z-10 mx-auto max-w-site px-4 sm:px-6">
         <div
@@ -149,18 +153,22 @@ export function Header() {
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
             {SITE.nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="relative text-sm opacity-70 transition-opacity duration-300 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:opacity-100 hover:after:scale-x-100"
+              <Link
+                key={item.to}
+                to={item.to}
+                onMouseEnter={() => prefetchRoute(item.to)}
+                onFocus={() => prefetchRoute(item.to)}
+                aria-current={isActive(item.to) ? 'page' : undefined}
+                className="relative text-sm opacity-70 transition-opacity duration-300 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:opacity-100 hover:after:scale-x-100 aria-[current=page]:opacity-100 aria-[current=page]:after:scale-x-100"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
+            onMouseEnter={() => prefetchRoute('/contact')}
             className={`group hidden items-center gap-2 rounded-lg border px-3.5 py-2 text-xs font-medium transition-colors duration-300 md:inline-flex ${
               solid
                 ? 'border-ink/15 hover:border-ink/40'
@@ -172,7 +180,7 @@ export function Header() {
               className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               aria-hidden="true"
             />
-          </a>
+          </Link>
 
           <button
             ref={menuButtonRef}

@@ -1,7 +1,12 @@
 import { ArrowUpRight } from 'lucide-react'
 import { SITE } from '../config/site'
 import { Reveal } from '../components/ui/Reveal'
-import { SectionLabel } from '../components/ui/SectionLabel'
+
+const DETAILS = [
+  { label: 'Email', value: SITE.email, href: `mailto:${SITE.email}` },
+  { label: 'Studio', value: `${SITE.location} · Working worldwide` },
+  { label: 'Availability', value: 'Open for 2026 projects' },
+]
 
 export function Contact() {
   return (
@@ -15,18 +20,12 @@ export function Contact() {
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute left-1/2 top-1/2 size-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-[100px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 size-[340px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(169,184,255,0.32),transparent_68%)]"
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-site px-6 py-28 md:py-40">
-        <Reveal>
-          <SectionLabel index="06" tone="light">
-            Contact
-          </SectionLabel>
-        </Reveal>
-
-        <div className="mt-14 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20">
+      <div className="relative mx-auto max-w-site px-6 pb-28 pt-32 md:pb-40 md:pt-40">
+        <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:gap-20">
           <Reveal>
             <h2 className="max-w-[14ch] font-display text-[clamp(2.8rem,6.4vw,6.4rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-balance">
               Have an idea worth building?
@@ -49,9 +48,56 @@ export function Contact() {
             </a>
 
             <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-              {SITE.email} · Placeholder contact
+              Placeholder contact details
             </p>
           </Reveal>
+        </div>
+
+        <div className="mt-20 grid gap-8 border-t border-ink/10 pt-8 sm:grid-cols-3">
+          {DETAILS.map((detail, index) => (
+            <Reveal key={detail.label} delay={index * 0.05}>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+                {detail.label}
+              </p>
+              {detail.href ? (
+                <a
+                  href={detail.href}
+                  className="mt-3 inline-block text-sm text-ink/75 transition-colors hover:text-ink"
+                >
+                  {detail.value}
+                </a>
+              ) : (
+                <p className="mt-3 text-sm text-ink/75">{detail.value}</p>
+              )}
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-12 flex flex-wrap gap-6 border-t border-ink/10 pt-8">
+          <a
+            href={SITE.socials.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-2 text-sm text-ink/70 transition-colors hover:text-ink"
+          >
+            LinkedIn
+            <ArrowUpRight
+              className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </a>
+          <a
+            href={SITE.socials.instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex items-center gap-2 text-sm text-ink/70 transition-colors hover:text-ink"
+          >
+            Instagram
+            <ArrowUpRight
+              className="size-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            />
+          </a>
         </div>
       </div>
     </section>

@@ -1,7 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Reveal } from '../components/ui/Reveal'
-import { SectionLabel } from '../components/ui/SectionLabel'
 import { GameArtwork } from '../components/visuals/GameArtwork'
 import { WalletVisual } from '../components/visuals/WalletVisual'
 
@@ -82,14 +81,8 @@ function ProjectCard({
 export function SelectedWork() {
   return (
     <section id="work" className="bg-paper text-ink">
-      <div className="mx-auto max-w-site px-6 py-28 md:py-40">
-        <Reveal>
-          <SectionLabel index="04" tone="light">
-            Selected work
-          </SectionLabel>
-        </Reveal>
-
-        <div className="mt-8 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <div className="mx-auto max-w-site px-6 pb-28 pt-32 md:pb-40 md:pt-40">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <Reveal>
             <h2 className="font-display text-[clamp(2.8rem,6vw,6rem)] font-semibold leading-[0.95] tracking-[-0.05em]">
               Built with purpose.

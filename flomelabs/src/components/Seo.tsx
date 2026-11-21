@@ -1,20 +1,36 @@
-import { Helmet } from 'react-helmet-async'
+import { useEffect } from 'react'
 import { SITE } from '../config/site'
 
-const TITLE = `${SITE.name} — Independent Digital Studio`
-const DESCRIPTION =
+const DEFAULT_TITLE = `${SITE.name} — Independent Digital Studio`
+const DEFAULT_DESCRIPTION =
   'FlomeLabs is an independent digital studio designing and building mobile applications, software products and video games.'
 
-export function Seo() {
-  return (
-    <Helmet>
-      <title>{TITLE}</title>
-      <meta name="description" content={DESCRIPTION} />
-      <meta name="theme-color" content="#111318" />
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content={TITLE} />
-      <meta property="og:description" content={DESCRIPTION} />
-      <meta name="twitter:card" content="summary_large_image" />
-    </Helmet>
+interface SeoProps {
+  title?: string
+  description?: string
+}
+
+function upsertMeta(attribute: 'name' | 'property', key: string, content: string) {
+  let element = document.head.querySelector<HTMLMetaElement>(
+    `meta[${attribute}="${key}"]`,
   )
+
+  if (!element) {
+    element = document.createElement('meta')
+    element.setAttribute(attribute, key)
+    document.head.appendChild(element)
+  }
+
+  element.setAttribute('content', content)
+}
+
+export function Seo({ title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION }: SeoProps) {
+  useEffect(() => {
+    document.title = title
+    upsertMeta('name', 'description', description)
+    upsertMeta('property', 'og:title', title)
+    upsertMeta('property', 'og:description', description)
+  }, [title, description])
+
+  return null
 }

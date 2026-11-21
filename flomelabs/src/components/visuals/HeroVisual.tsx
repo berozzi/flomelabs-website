@@ -1,49 +1,16 @@
-import { motion, useReducedMotion, useSpring, useTransform } from 'framer-motion'
-import type { MouseEvent } from 'react'
 import { useId } from 'react'
-
-const EASE = [0.16, 1, 0.3, 1] as const
 
 export function HeroVisual() {
   const uid = useId().replace(/:/g, '')
-  const reduce = useReducedMotion()
-
-  const pointerX = useSpring(0, { stiffness: 120, damping: 22 })
-  const pointerY = useSpring(0, { stiffness: 120, damping: 22 })
-  const rotateX = useTransform(pointerY, [-0.5, 0.5], [7, -7])
-  const rotateY = useTransform(pointerX, [-0.5, 0.5], [-9, 9])
-
-  function handleMouseMove(event: MouseEvent<HTMLDivElement>) {
-    if (reduce) return
-    const rect = event.currentTarget.getBoundingClientRect()
-    pointerX.set((event.clientX - rect.left) / rect.width - 0.5)
-    pointerY.set((event.clientY - rect.top) / rect.height - 0.5)
-  }
-
-  function handleMouseLeave() {
-    pointerX.set(0)
-    pointerY.set(0)
-  }
 
   return (
-    <motion.div
-      className="relative mx-auto aspect-square w-full max-w-[560px] [perspective:1200px]"
+    <div
+      className="group relative mx-auto aspect-square w-full max-w-[560px] [perspective:1200px]"
       aria-hidden="true"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={reduce ? false : { opacity: 0, scale: 0.94 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.2, delay: 0.35, ease: EASE }}
     >
-      <div
-        className="absolute left-1/2 top-1/2 size-[62%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/20 blur-[110px]"
-        aria-hidden="true"
-      />
+      <div className="absolute left-1/2 top-1/2 size-[62%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(169,184,255,0.34),transparent_70%)]" />
 
-      <motion.div
-        className="absolute inset-0 [transform-style:preserve-3d]"
-        style={{ rotateX, rotateY }}
-      >
+      <div className="absolute inset-0 [transform-style:preserve-3d] transition-transform duration-700 ease-out [transform:rotateX(0deg)_rotateY(0deg)] group-hover:[transform:rotateX(-3deg)_rotateY(5deg)]">
         <svg
           viewBox="0 0 600 600"
           fill="none"
@@ -140,9 +107,9 @@ export function HeroVisual() {
           className="absolute inset-x-[14%] bottom-[1%] h-[20%] bg-[radial-gradient(circle,rgba(244,242,237,0.22)_1px,transparent_1px)] bg-[size:14px_14px] opacity-50 [mask-image:linear-gradient(to_top,black,transparent)]"
           aria-hidden="true"
         />
-      </motion.div>
+      </div>
 
       <div className="grain pointer-events-none absolute inset-0 overflow-hidden rounded-[32px]" />
-    </motion.div>
+    </div>
   )
 }

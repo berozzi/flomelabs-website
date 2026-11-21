@@ -29,9 +29,6 @@ export function GameArtwork({ className = '', showTitle = true }: GameArtworkPro
             <stop offset="0" stopColor="#e8c39e" stopOpacity="0.85" />
             <stop offset="1" stopColor="#e8c39e" stopOpacity="0" />
           </radialGradient>
-          <filter id={`${uid}-blur`}>
-            <feGaussianBlur stdDeviation="14" />
-          </filter>
         </defs>
 
         <rect width="600" height="400" fill={`url(#${uid}-sky)`} />
@@ -68,7 +65,6 @@ export function GameArtwork({ className = '', showTitle = true }: GameArtworkPro
             ry="92"
             fill={`url(#${uid}-ember)`}
             opacity="0.4"
-            filter={`url(#${uid}-blur)`}
           />
           <path
             d="M300 110 L335 210 L320 300 L300 330 L280 300 L265 210 Z"

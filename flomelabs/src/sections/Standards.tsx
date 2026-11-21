@@ -1,5 +1,4 @@
 import { Reveal } from '../components/ui/Reveal'
-import { SectionLabel } from '../components/ui/SectionLabel'
 
 const PRINCIPLES = [
   {
@@ -27,7 +26,7 @@ export function Standards() {
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -right-40 top-1/2 size-[520px] -translate-y-1/2 rounded-full bg-accent/5 blur-[140px]"
+        className="pointer-events-none absolute -right-40 top-1/2 size-[520px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(169,184,255,0.1),transparent_68%)]"
         aria-hidden="true"
       />
 
@@ -35,12 +34,7 @@ export function Standards() {
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div className="lg:sticky lg:top-32 lg:self-start">
             <Reveal>
-              <SectionLabel index="05" tone="dark">
-                Our standards
-              </SectionLabel>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mt-8 max-w-[13ch] font-display text-[clamp(2.6rem,5.2vw,4.8rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
+              <h2 className="max-w-[13ch] font-display text-[clamp(2.6rem,5.2vw,4.8rem)] font-semibold leading-[0.98] tracking-[-0.05em]">
                 We care about the details.
               </h2>
             </Reveal>

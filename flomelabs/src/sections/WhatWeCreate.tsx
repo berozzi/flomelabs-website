@@ -1,6 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from '../components/ui/Reveal'
-import { SectionLabel } from '../components/ui/SectionLabel'
 import { GameArtwork } from '../components/visuals/GameArtwork'
 import { PhoneMockup } from '../components/visuals/PhoneMockup'
 
@@ -10,10 +9,7 @@ export function WhatWeCreate() {
       <div className="mx-auto max-w-site px-6 py-28 md:py-40">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <Reveal>
-            <SectionLabel index="03" tone="dark">
-              What we create
-            </SectionLabel>
-            <h2 className="mt-8 font-display text-[clamp(2.6rem,5.4vw,5.2rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
+            <h2 className="font-display text-[clamp(2.6rem,5.4vw,5.2rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
               Different worlds.
               <br />
               One vision.

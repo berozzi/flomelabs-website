@@ -16,7 +16,7 @@ export function WalletVisual({ className = '' }: WalletVisualProps) {
         aria-hidden="true"
       />
       <div
-        className="absolute left-1/2 top-1/2 size-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/45 blur-[90px]"
+        className="absolute left-1/2 top-1/2 size-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(169,184,255,0.55),transparent_68%)]"
         aria-hidden="true"
       />
 

@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { Link } from 'react-router-dom'
 
 type Variant = 'primary' | 'outline-dark' | 'outline-light'
 
@@ -26,21 +27,33 @@ export function Button({
   className = '',
   external = false,
 }: ButtonProps) {
-  const externalProps: { target?: '_blank'; rel?: string } = external
-    ? { target: '_blank', rel: 'noreferrer' }
-    : {}
+  const classes = `group inline-flex items-center gap-3 rounded-xl px-5 py-3.5 text-sm font-medium transition-colors duration-300 ${variants[variant]} ${className}`
 
-  return (
-    <a
-      href={href}
-      className={`group inline-flex items-center gap-3 rounded-xl px-5 py-3.5 text-sm font-medium transition-colors duration-300 ${variants[variant]} ${className}`}
-      {...externalProps}
-    >
+  const content = (
+    <>
       {children}
       <ArrowUpRight
         className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
         aria-hidden="true"
       />
+    </>
+  )
+
+  if (href.startsWith('/') && !external) {
+    return (
+      <Link to={href} className={classes}>
+        {content}
+      </Link>
+    )
+  }
+
+  return (
+    <a
+      href={href}
+      className={classes}
+      {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+    >
+      {content}
     </a>
   )
 }
