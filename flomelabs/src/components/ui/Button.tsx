@@ -2,7 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-type Variant = 'primary' | 'outline-dark' | 'outline-light'
+type Variant = 'primary' | 'outline-dark' | 'outline-light' | 'solid-dark'
 
 interface ButtonProps {
   href: string
@@ -18,6 +18,7 @@ const variants: Record<Variant, string> = {
     'border border-paper/20 text-paper hover:border-accent hover:bg-paper/5',
   'outline-light':
     'border border-ink/15 text-ink hover:border-ink/40 hover:bg-ink/5',
+  'solid-dark': 'bg-ink text-paper hover:bg-ink-soft',
 }
 
 export function Button({

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FlomeLabs — checklista przed startem strony</title>
+<style>
+  @page { size: A4; margin: 14mm; }
+  * { box-sizing: border-box; }
+  body { font: 13px/1.45 "Segoe UI", Arial, sans-serif; color: #111; max-width: 190mm; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .sub { color: #555; margin: 0 0 18px; }
+  h2 { font-size: 15px; margin: 22px 0 6px; padding: 4px 8px; background: #111318; color: #fff; break-after: avoid; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { display: flex; gap: 10px; align-items: flex-start; padding: 5px 0; border-bottom: 1px dotted #bbb; break-inside: avoid; }
+  li::before { content: ""; flex: none; width: 15px; height: 15px; margin-top: 1px; border: 1.6px solid #111; border-radius: 2px; }
+  li small { display: block; color: #666; font-size: 11px; }
+  code { font: 11px Consolas, monospace; background: #eee; padding: 0 3px; }
+  .note { margin-top: 20px; padding: 8px 10px; border: 1px solid #999; font-size: 12px; }
+  .blank { display: inline-block; min-width: 55mm; border-bottom: 1px solid #333; }
+  @media print { body { padding: 0; } h2 { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+
+<h1>FlomeLabs — checklista przed startem strony</h1>
+<p class="sub">Stan na 21.11.2026 · Zaznacz ☐ po wykonaniu. Strona: <code>flomelabs/</code> (React + Vite).</p>
+
+<h2>1. Dane kontaktowe i firmowe</h2>
+<ul>
+  <li><span>Prawdziwy adres e-mail firmy<small>Obecnie <code>hello@flomelabs.example</code> w <code>src/config/site.ts</code> — widoczny w Contact, polityce i regulaminie</small></span></li>
+  <li><span>Skrzynka działa i ktoś ją czyta (test: wyślij wiadomość z zewnątrz)</span></li>
+  <li><span>Osobny adres do spraw prywatności / RODO (opcjonalnie, np. <code>privacy@</code>)</span></li>
+  <li><span>Adres do wsparcia użytkowników aplikacji (opcjonalnie, np. <code>support@</code>)</span></li>
+  <li><span>Numer telefonu (jeśli ma być publiczny)</span></li>
+  <li><span>Pełna nazwa firmy / forma prawna<small>Do polityki prywatności (administrator danych) i stopki</small></span></li>
+  <li><span>NIP, REGON / KRS (jeśli dotyczy)</span></li>
+  <li><span>Adres siedziby / adres do korespondencji</span></li>
+  <li><span>Lokalizacja i deklaracja dostępności<small>Teraz: „Poland · Working worldwide”, „Open for 2026 projects” — zaktualizuj rok i treść</small></span></li>
+  <li><span>Usunąć napisy „Placeholder contact details”<small><code>src/sections/Contact.tsx</code> i <code>src/components/layout/Footer.tsx</code></small></span></li>
+</ul>
+
+<h2>2. Social media i linki zewnętrzne</h2>
+<ul>
+  <li><span>Prawdziwy profil LinkedIn<small>Teraz: <code>.../flomelabs-placeholder</code> w <code>site.ts</code></small></span></li>
+  <li><span>Prawdziwy profil Instagram<small>Teraz: <code>.../flomelabs.placeholder</code></small></span></li>
+  <li><span>Inne profile (GitHub, X, YouTube) — czy potrzebne?</span></li>
+  <li><span>Linki do sklepów z aplikacjami (Google Play / App Store) dla Vitelo i pozostałych</span></li>
+  <li><span>Domena <code>flomelabs.*</code> zakupiona i podpięta pod hosting</span></li>
+</ul>
+
+<h2>3. Treści strony</h2>
+<ul>
+  <li><span>Przejrzeć wszystkie teksty (Hero, Philosophy, What We Create, Standards, Work, Contact)</span></li>
+  <li><span>Zdecydować o języku strony: EN, PL czy oba<small>Strona jest po angielsku, polityki po polsku</small></span></li>
+  <li><span>Prawdziwe opisy i grafiki projektów w sekcji Work / Selected Work</span></li>
+  <li><span>Zrzuty ekranu / mockupy aplikacji Vitelo (oraz Tasher, DocDocker)</span></li>
+  <li><span>Sprawdzić, czy wszystkie projekty w sekcji Work są prawdziwe i aktualne</span></li>
+  <li><span>Treści dla Tashera i DocDockera na stronie <code>/software-policies/…</code><small>Teraz puste — albo uzupełnić, albo usunąć z <code>src/config/apps.ts</code></small></span></li>
+  <li><span>Dane zespołu / sekcja „o nas” (jeśli ma być)</span></li>
+</ul>
+
+<h2>4. Dokumenty prawne (Vitelo)</h2>
+<ul>
+  <li><span>Przegląd Polityki Prywatności i Regulaminu przez prawnika<small><code>src/config/policies.ts</code></small></span></li>
+  <li><span>Wpisać dane administratora w polityce (nazwa firmy, adres, NIP)</span></li>
+  <li><span>Potwierdzić okres przechowywania danych w Firebase (w polityce: 14 miesięcy)</span></li>
+  <li><span>Potwierdzić, że do Firebase nie trafiają dane z paragonów ani kart</span></li>
+  <li><span>Okno zgody na analitykę w aplikacji (consent) i dopisek w polityce</span></li>
+  <li><span>Ustawić w Firebase / Google Analytics zgodność z RODO (anonimizacja IP, brak reklam, umowa powierzenia z Google)</span></li>
+  <li><span>Wypełnić „Data safety” (Google Play) i „App Privacy” (App Store) zgodnie z polityką</span></li>
+  <li><span>Linki do polityki i regulaminu wpisać w sklepach z aplikacjami<small>Adresy: <code>/software-policies/vitelo/polityka-prywatnosci</code> i <code>/regulamin</code></small></span></li>
+  <li><span>Polityka cookies / informacja o cookies strony (jeśli strona używa analityki lub cookies)</span></li>
+  <li><span>Polityki dla Tashera i DocDockera (gdy będą publikowane)</span></li>
+  <li><span>Linki do polityk w stopce strony</span></li>
+</ul>
+
+<h2>5. Formularz kontaktowy i poczta</h2>
+<ul>
+  <li><span>Zdecydować: sam link <code>mailto:</code> czy formularz na stronie<small>Teraz tylko <code>mailto:</code> — brak backendu</small></span></li>
+  <li><span>Jeśli formularz: backend / usługa (np. Formspree, Resend, Firebase Functions)</span></li>
+  <li><span>Ochrona przed spamem (reCAPTCHA / Turnstile / honeypot)</span></li>
+  <li><span>Zgoda RODO przy formularzu + klauzula informacyjna</span></li>
+  <li><span>Poczta domenowa: rekordy SPF, DKIM, DMARC (żeby maile nie trafiały do spamu)</span></li>
+</ul>
+
+<h2>6. SEO i udostępnianie</h2>
+<ul>
+  <li><span>Obraz Open Graph (<code>og:image</code>, 1200×630) — obecnie brak</span></li>
+  <li><span>Tagi <code>og:url</code>, <code>canonical</code> i <code>og:site_name</code></span></li>
+  <li><span>Favicon w kilku rozmiarach + <code>apple-touch-icon</code> + <code>site.webmanifest</code><small>Obecnie tylko <code>favicon.svg</code></small></span></li>
+  <li><span><code>sitemap.xml</code> i dopisek w <code>robots.txt</code><small>Obecnie robots.txt bez sitemapy</small></span></li>
+  <li><span>Dane strukturalne JSON-LD (Organization)</span></li>
+  <li><span>Dodać <code>noindex</code> do podstron, których nie chcesz w Google (jeśli są)</span></li>
+  <li><span>Dodać stronę w Google Search Console i Bing Webmaster</span></li>
+  <li><span>Prerender / SSR dla SEO<small>Strona to SPA — Google radzi sobie, ale boty social media nie widzą <code>Helmet</code></small></span></li>
+</ul>
+
+<h2>7. Hosting, domena, wdrożenie</h2>
+<ul>
+  <li><span>Wybór hostingu (Vercel, Netlify, Cloudflare Pages, Firebase Hosting)</span></li>
+  <li><span>Przekierowanie wszystkich tras na <code>index.html</code> (SPA fallback)<small>Bez tego <code>/contact</code> i <code>/software-policies/…</code> dadzą 404 po odświeżeniu</small></span></li>
+  <li><span>HTTPS i certyfikat; przekierowanie <code>www</code> ↔ bez <code>www</code></span></li>
+  <li><span>Rekordy DNS (A/CNAME, MX dla poczty)</span></li>
+  <li><span>Pipeline wdrożenia (np. automatycznie po pushu na <code>main</code>)</span></li>
+  <li><span>Nagłówki bezpieczeństwa (CSP, X-Content-Type-Options, Referrer-Policy)</span></li>
+  <li><span>Strona 404 (teraz przekierowuje wszystko na stronę główną)</span></li>
+  <li><span>Monitoring dostępności (np. UptimeRobot)</span></li>
+</ul>
+
+<h2>8. Jakość techniczna</h2>
+<ul>
+  <li><span><code>npm run build</code> przechodzi bez błędów i ostrzeżeń</span></li>
+  <li><span>Test podglądu produkcyjnego (<code>npm run preview</code>) i wszystkich linków</span></li>
+  <li><span>Test na telefonie (iOS Safari, Android Chrome) i na desktopie (Chrome, Firefox, Safari, Edge)</span></li>
+  <li><span>Lighthouse: wydajność, dostępność, SEO, best practices (cel ≥ 90)</span></li>
+  <li><span>Dostępność: kontrast, nawigacja klawiaturą, <code>alt</code> do obrazów, <code>prefers-reduced-motion</code></span></li>
+  <li><span>Optymalizacja obrazów (WebP/AVIF) i rozmiaru paczki JS</span></li>
+  <li><span>Atrybut <code>lang</code> w <code>index.html</code> zgodny z językiem treści<small>Obecnie <code>lang="en"</code></small></span></li>
+  <li><span>Zaktualizować zależności i uruchomić <code>npm audit</code></span></li>
+  <li><span>Uporządkować plik <code>package-lock.json</code> w katalogu głównym (jest drugi w <code>flomelabs/</code>)</span></li>
+  <li><span>Zaktualizować <code>README.md</code> i <code>TODO.md</code><small>TODO.md opisuje starą wersję strony (pliki, które już nie istnieją)</small></span></li>
+</ul>
+
+<h2>9. Analityka strony</h2>
+<ul>
+  <li><span>Czy strona ma mieć analitykę (GA4 / Plausible / brak)?</span></li>
+  <li><span>Jeśli tak: baner zgody na cookies i zapis w polityce cookies</span></li>
+</ul>
+
+<h2>10. Aplikacja Vitelo (powiązane ze stroną)</h2>
+<ul>
+  <li><span>Konfiguracja projektu Firebase i podpięcie Analytics</span></li>
+  <li><span>Ustawienie retencji danych w Firebase (zgodnie z polityką)</span></li>
+  <li><span>Link do polityki prywatności widoczny w aplikacji (ustawienia / „O aplikacji”)</span></li>
+  <li><span>Konto deweloperskie Google Play / Apple Developer</span></li>
+  <li><span>Ikona, opis sklepowy, zrzuty ekranu do sklepów</span></li>
+</ul>
+
+<div class="note">
+  Notatki / decyzje:<br /><br />
+  <span class="blank"></span> <span class="blank"></span><br /><br />
+  <span class="blank"></span> <span class="blank"></span>
+</div>
+
+</body>
+</html>

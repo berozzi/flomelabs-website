@@ -3,6 +3,7 @@ import { Hero } from '../sections/Hero'
 import { Philosophy } from '../sections/Philosophy'
 import { WhatWeCreate } from '../sections/WhatWeCreate'
 import { Standards } from '../sections/Standards'
+import { ContactCta } from '../sections/ContactCta'
 
 export function Home() {
   return (
@@ -12,6 +13,7 @@ export function Home() {
       <Philosophy />
       <WhatWeCreate />
       <Standards />
+      <ContactCta />
     </>
   )
 }
